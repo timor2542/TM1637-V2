@@ -42,7 +42,6 @@ namespace TM1637 {
          */
         _start() {
             pins.digitalWritePin(this.dio, 0);
-            control.waitMicros(TM1637_PAUSE_TIME_US);
             pins.digitalWritePin(this.clk, 0);
             control.waitMicros(TM1637_PAUSE_TIME_US);
         }
@@ -52,11 +51,9 @@ namespace TM1637 {
          */
         _stop() {
             pins.digitalWritePin(this.dio, 0);
-            control.waitMicros(TM1637_PAUSE_TIME_US);
             pins.digitalWritePin(this.clk, 1);
             control.waitMicros(TM1637_PAUSE_TIME_US);
             pins.digitalWritePin(this.dio, 1);
-            control.waitMicros(TM1637_PAUSE_TIME_US);
         }
 
         /**
@@ -83,7 +80,6 @@ namespace TM1637 {
         _write_byte(b: number) {
             for (let i = 0; i < 8; i++) {
                 pins.digitalWritePin(this.dio, (b >> i) & 1);
-                control.waitMicros(TM1637_PAUSE_TIME_US);
                 pins.digitalWritePin(this.clk, 1);
                 control.waitMicros(TM1637_PAUSE_TIME_US);
                 pins.digitalWritePin(this.clk, 0);
